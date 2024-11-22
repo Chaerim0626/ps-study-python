@@ -4,24 +4,25 @@ input = sys.stdin.readline
 n = int(input())
 li = list(map(int,input().split()))
 li.sort()
-result = float('inf')
-left, right = 0, n-1
-
-answer = (0,0)
+tmp2 = float('inf')
+result = [0,0]
+left,right = 0, n-1
 
 while left < right:
     tmp = li[left] + li[right]
 
-    if abs(tmp) < abs(result):
-        result = tmp
-        answer = (li[left], li[right])
-    
-    if tmp > 0:
+    if abs(tmp) < abs(tmp2):
+        tmp2 = tmp 
+        result = [li[left],li[right]]
+
+
+    if tmp > 0: # 0 보다 크니까 - 쪽으로
         right -= 1
+    
     elif tmp < 0:
         left += 1
     else:
-        answer = (li[left], li[right])
-        break
+        result = [li[left], li[right]]
+        break 
 
-print(answer[0], answer[1])
+print(*result)
